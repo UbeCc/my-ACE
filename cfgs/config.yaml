@@ -1,0 +1,43 @@
+defaults:
+  - _self_
+
+device: 4
+
+seeds: 
+# - 0
+# - 42
+- 3407 # https://arxiv.org/abs/2109.08203
+
+tag: null
+# Halfcheetah，Walker2d and Ant
+env_name: Walker2d-v4
+vec_envs: 1
+
+train:
+  nstep: ${buffer.nstep}
+  vec_envs: ${vec_envs}
+  timesteps: 200_000
+  batch_size: 512
+  plot_interval: 512
+  eval_interval: 512
+  eval_episodes: 5
+  update_causal_weight_interval: 2_000
+  update_cw_batch_size: 5_000
+
+buffer:
+  capacity: 200_000
+  use_per: False
+  use_her: False
+  nstep: 1
+  gamma: ${agent.gamma}
+  per_alpha: 0.7
+  per_beta: 0.4
+  per_eps: 0.01
+  goal_size: 4
+
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: ./runs/${now:%Y-%m-%d}/${now:%H-%M-%S}_${hydra.job.override_dirname}

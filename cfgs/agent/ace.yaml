@@ -1,0 +1,13 @@
+_target_: agent.ace.ACEAgent
+nstep: ${buffer.nstep}
+hidden_dim: [512, 512, 512]
+target_update_interval: 2
+reset_update_interval: 200000
+lr_actor: 3.0e-4
+lr_critic: 3.0e-4
+lr_alpha: 5.0e-4
+gamma: 0.99
+tau: 0.005
+log_std_min: -20
+log_std_max: 1
+threshold: 0.025
